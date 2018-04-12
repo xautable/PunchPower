@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Punch Power</string>
+    <string name="escogerpj">Escoger Personaje</string>
+    <string name="tituloAyuda">Ayuda</string>
+    <string name="explicaAtaqueArriba">Desliza arriba para pegar un puñetazo arriba</string>
+    <string name="comojugar">Como se juega:</string>
+    <string name="explicaAtaqueAbajo">Desliza abajo para pegar un puñetazo abajo</string>
+    <string name="explicaAtaqueDerecha">Desliza derecha para pegar a la derecha</string>
+    <string name="explicaAtaqueIzquierda">Desliza izquierda para pegar a la izquierda</string>
+    <string name="creditos">Créditos:</string>
+    <string name="titulorecord">Mejor Jugador</string>
+    <string name="mejorpuntuacion">"Mejor Puntuación: "</string>
+    <string name="agitarparaenviar">Agita para enviar tu puntuación</string>
+    <string name="explicacionmusica">1 tap= apagar música</string>
+    <string name="explicacionsonido">Long Press= sonido off</string>
+    <string name="puntuacionactual">"Tu puntuación: "</string>
+    <string name="lose">Has Perdido</string>
+    <string name="autormusica">"Música: "</string>
+    <string name="punchsound">"Sonido puñetazo: "</string>
+    <string name="txtautorluchadores">"Personajes: "</string>
+    <string name="explicaporquegolpear">Golpea a un enemigo para matarlo y ganar puntos</string>
+    <string name="fuente">"Fuente: "</string>
+    <string name="fondos">"Fondo de pantalla Ayuda, Opciones y Record: "</string>
+    <string name="miscreditos">"Escenas y botones: "</string>
+    <string name="hintIntroduceNombre">Nombre</string>
+    <string name="btnvalidarnombre">Comprobar nombre</string>
+    <string name="btnaceptar">Aceptar</string>
+</resources>

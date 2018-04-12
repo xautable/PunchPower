@@ -41,7 +41,7 @@ class DetectorDeGestos extends GestureDetector.SimpleOnGestureListener {
         if (ControlEscenas.pantallaActual == 1) {
             if (PantallaJuego.acaba == true) {
 
-                ControlEscenas.esTitulo = true;
+                ControlEscenas.irdatos=true;
             }
         }
         if (ControlEscenas.pantallaActual == 4) {

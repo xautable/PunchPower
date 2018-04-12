@@ -83,4 +83,8 @@ public class Escenas {
     public int onSensorChanged(SensorEvent event) {
         return 0;
     }
+
+    public int gestionaColDatos(MotionEvent event) {
+        return 0;
+    }
 }

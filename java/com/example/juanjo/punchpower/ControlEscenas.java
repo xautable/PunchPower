@@ -56,6 +56,7 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
     static int pantallaActual = 0;
     public GestureDetectorCompat detectorDeGestos;
     static boolean esTitulo = true;
+    static boolean irdatos=false;
     private static final float SHAKE_THRESHOLD = 1.1f;
     private static final int SHAKE_WAIT_TIME_MS = 2500;
     private long mShakeTime = 0;
@@ -309,6 +310,7 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                 if (pantalla == null || pantalla.getClass() != PantallaRecord.class)
                     pantalla = new PantallaRecord(context);
                 return true;
+
         }
         return false;
 
@@ -327,6 +329,11 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                     pantallaActual = pantalla.gestionaColisiones(event);
                     gesCambio(pantallaActual);
                     esTitulo = false;
+
+                }
+                if(irdatos){
+                   Intent intentdatos=new Intent(context,PantallaDatos.class);
+                    startActivity(context, intentdatos, null);
 
                 }
             }
@@ -353,8 +360,6 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                 } else {
                     return true;
                 }
-
-
             }
 
 

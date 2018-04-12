@@ -1,2 +1,0 @@
-# PunchPower
-Proyecto Practicas

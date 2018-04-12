@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Punch Power</string>
+    <string name="escogerpj">Choose character</string>
+    <string name="tituloAyuda">Help</string>
+    <string name="explicaAtaqueArriba">Swipe up to punch up</string>
+    <string name="comojugar">How to play:</string>
+    <string name="explicaAtaqueAbajo">Swipe down to punch down</string>
+    <string name="explicaAtaqueDerecha">Swipe right to punch right</string>
+    <string name="explicaAtaqueIzquierda">Swipe left to punch left</string>
+    <string name="creditos">Credits:</string>
+    <string name="titulorecord">Best Player</string>
+    <string name="mejorpuntuacion">Best Score:</string>
+    <string name="agitarparaenviar">Shake to send your score</string>
+    <string name="explicacionsonido">Long Press= sound off</string>
+    <string name="puntuacionactual">Your score:</string>
+    <string name="lose">You Lose</string>
+    <string name="autormusica">Music:</string>
+    <string name="punchsound">Punch sound:</string>
+    <string name="txtautorluchadores">Characters:</string>
+    <string name="explicacionmusica">1 tap= music off</string>
+    <string name="explicaporquegolpear">Hit an enemy to kill him and earn points</string>
+    <string name="fuente">Font:</string>
+    <string name="miscreditos">Scenes, Buttons:</string>
+    <string name="fondos">Backgrounds of Help screen, Options screen and Record screen:</string>
+    <string name="hintIntroduceNombre">Name</string>
+    <string name="btnvalidarnombre">Validate Name</string>
+    <string name="btnaceptar">OK</string>
+</resources>
