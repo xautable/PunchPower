@@ -1,0 +1,9 @@
+En este documento pongo los problemas que contiene actualmente el proyecto y que quiero solucionar.
+
+Problemas:
+
+1- Al terminar la partida y darle a jugar otra vez, a veces mi personaje aparece dando el ultimo puñetazo de la partida anterior.
+
+2- El onFling no funciona todo lo bien que debe y a veces falla.
+
+3- La duracion de las imagenes de mi personaje dando el puñetazo no siguen el tiempo establecido en un timer que he creado y a veces duran mucho y a veces son tan rapidas que ni te da tiempo a ver el puñetazo.
