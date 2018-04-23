@@ -332,8 +332,10 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
 
                 }
                 if(irdatos){
+                   gesCambio(0);
                    Intent intentdatos=new Intent(context,PantallaDatos.class);
                     startActivity(context, intentdatos, null);
+                    irdatos=false;
 
                 }
             }
