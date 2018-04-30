@@ -25,4 +25,5 @@
     <string name="hintIntroduceNombre">Name</string>
     <string name="btnvalidarnombre">Validate Name</string>
     <string name="btnaceptar">OK</string>
+    <string name="facebook_app_id">1891122434283818</string>
 </resources>

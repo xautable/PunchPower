@@ -7,3 +7,5 @@ Hasta el dia de hoy las mejoras o nuevos elementos de mi proyecto son los siguie
 3- Implemente una animacion en la validacion de nombre de usuario.
 4- Agregue una base de datos sqlite para los records
 5- Retoque la pantalla datos para que valide el nombre de usuario y compruebe que no existe en la base de datos.
+6- Agrege la red social twitter para que el usuario envie un tweet ya sea el predefinido que dice que el juego mola y el enlace(cuando este)de la play store o si quiere puede escribir uno propio.
+7- Agregue la red Social Facebook, estuve tocando la api de facebook pero para el uso que yo quiero no era necesario aunque en un futuro agregare un login por facebook

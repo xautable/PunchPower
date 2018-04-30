@@ -256,13 +256,15 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
 
             if (gForce > SHAKE_THRESHOLD) {
 
-                Intent sendIntent = new Intent();
+               /* Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.puntuacionactual) + "" + PantallaJuego.puntuacion);
                 sendIntent.setType("text/plain");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(context, sendIntent, null);
-
+                */
+                Intent intentListado=new Intent(context,ListadoJugadores.class);
+                startActivity(context,intentListado,null);
 
             }
 

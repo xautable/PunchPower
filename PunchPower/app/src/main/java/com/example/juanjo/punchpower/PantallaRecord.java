@@ -1,5 +1,6 @@
 package com.example.juanjo.punchpower;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -7,8 +8,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.hardware.SensorEvent;
+import android.support.constraint.ConstraintLayout;
+import android.view.View;
+import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 
 /**
@@ -57,13 +65,18 @@ public class PantallaRecord extends Escenas {
             }
         }
 
+
     }
     /**
      * Funcion que actualiza la fisica
      */
     @Override
     public void actualizarFisica() {
+
         super.actualizarFisica();
+
+
+
     }
     /**
      * Funcion que nos permite dibujar sobre un lienzo
