@@ -25,7 +25,6 @@ public class ListadoJugadores extends AppCompatActivity {
         adaptador=new ArrayAdapter(this,android.R.layout.simple_list_item_1,nombres);
 
         lv.setAdapter(adaptador);
-        Log.v("Inicio","Se inicio",null);
-        Toast.makeText(getApplicationContext(),""+nombres.size(),Toast.LENGTH_LONG).show();
+
     }
 }
