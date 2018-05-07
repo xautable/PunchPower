@@ -1,5 +1,6 @@
 package com.example.juanjo.punchpower;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,10 +12,15 @@ import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Clase PantallaJuego.
@@ -85,6 +91,14 @@ public class PantallaJuego extends Escenas {
     static int puntuacion;
     static boolean acaba;
     String txtLose;
+    int contPoderEspecial=0;
+    static boolean hasVibrator;
+    static boolean poderEspecialActivado;
+    Timer timer;
+    Handler handler;
+    Runnable runnable;
+
+
     /**
      * Constructor de la clase pantalla juego
      *
@@ -169,6 +183,20 @@ public class PantallaJuego extends Escenas {
 
 
     }
+    public void metodo_timer(){
+
+        contPoderEspecial++;
+        if(contPoderEspecial==5){
+            malo.setActivo(true);
+
+        }else{
+            if(contPoderEspecial>5){
+                contPoderEspecial=0;
+            }
+        }
+        handler.postDelayed(runnable,1000);
+    }
+
 
     /**
      * Función que actualiza la fisica
@@ -186,25 +214,31 @@ public class PantallaJuego extends Escenas {
         if (lado == 3)
             malo.moverEnemigo(alto, ancho, 2);
 
+
+
         if (malo.isActivo() && cuadradoHeroeArriba.intersect(malo.rectangulo) && ataquearriba == true) {
             Log.v("aaa", "Colisiona Arriba");
             malo.setActivo(false);
             puntuacion++;
+            contPoderEspecial++;
         }
         if (malo.isActivo() && cuadradoHeroeAbajo.intersect(malo.rectangulo) && ataqueabajo == true) {
             Log.v("aaa", "Colisiona Abajo");
             malo.setActivo(false);
             puntuacion++;
+            contPoderEspecial++;
         }
         if (malo.isActivo() && cuadradoHeroeIzquierda.intersect(malo.rectangulo) && ataqueizquierda == true) {
             Log.v("aaa", "Colisiona Izquierda");
             malo.setActivo(false);
             puntuacion++;
+            contPoderEspecial++;
         }
         if (malo.isActivo() && cuadradoHeroeDerecha.intersect(malo.rectangulo) && ataquederecha == true) {
             Log.v("aaa", "Colisiona Derecha");
             malo.setActivo(false);
             puntuacion++;
+            contPoderEspecial++;
         }
         if (malo.isActivo() && cuadradoHeroe.intersect(malo.rectangulo)) {
             Log.v("aaa", "Fin");
@@ -213,10 +247,31 @@ public class PantallaJuego extends Escenas {
             acaba = true;
         }
 
-        if (!malo.isActivo() && acaba == false) crea();
+        if (!malo.isActivo() && acaba == false) {
 
+            crea();
+
+        }
+//        if(contPoderEspecial==30){
+//            poderEspecialActivado=true;
+//        }
+
+        if(poderEspecialActivado==true){
+            malo.setActivo(false);
+            vibracionMovil();
+
+        }
+
+        if (System.currentTimeMillis() - tickCambio > 10000&& poderEspecialActivado==true && !malo.isActivo()) {
+            tickCambio = System.currentTimeMillis();
+            poderEspecialActivado=false;
+            contPoderEspecial=0;
+            malo.setActivo(true);
+
+        }
 
     }
+
     /**
      * Función que nos permite dibujar
      *
@@ -311,5 +366,11 @@ public class PantallaJuego extends Escenas {
 
 
     }
+    public void vibracionMovil() {
+        Vibrator mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        hasVibrator = mVibrator.hasVibrator();
+        mVibrator.vibrate(7000);
+    }
+
 
 }

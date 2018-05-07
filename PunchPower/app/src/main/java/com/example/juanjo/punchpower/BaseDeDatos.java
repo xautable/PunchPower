@@ -36,28 +36,16 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         Cursor registros = database.rawQuery(q, null);
 
         //Log.v("ooo","sss"+registros.getColumnName(registros.getPosition()+1),null);
+            if (registros.moveToFirst()) {
+
+                do {
+                    Log.v("ooo", "sss" + registros.getString(registros.getColumnIndex("Nombre")), null);
+
+                } while (registros.moveToNext());
 
 
-        try {
-            if (registros.moveToFirst())
-                Log.v("ooo", "sss" + registros.getCount(), null);
-            do {
-
-
-            } while (registros.moveToNext());
-
-
-            registros.close();
-
-
-
-
-        } catch (
-                Exception s)
-
-        {
-            s.getMessage();
-        }
+                registros.close();
+            }
         return nombres;
     }
 }

@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.content.Context;
@@ -228,7 +229,7 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
         }
 
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            if (pantallaActual == 5) {
+            if (pantallaActual == 5 || pantallaActual==1) {
                 detectShake(sensorEvent);
 
             }
@@ -263,8 +264,11 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(context, sendIntent, null);
                 */
-                Intent intentListado=new Intent(context,ListadoJugadores.class);
-                startActivity(context,intentListado,null);
+//                Intent intentListado=new Intent(context,ListadoJugadores.class);
+//                startActivity(context,intentListado,null);
+
+                PantallaJuego.poderEspecialActivado=true;
+
 
             }
 
