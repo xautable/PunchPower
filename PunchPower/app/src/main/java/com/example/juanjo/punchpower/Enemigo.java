@@ -27,6 +27,16 @@ public class Enemigo {
     public Rect rectangulo = new Rect();
     boolean activo = true;
 
+    public int getLado() {
+        return lado;
+    }
+
+    public void setLado(int lado) {
+        this.lado = lado;
+    }
+
+    public int lado;
+
     /**
      * Constructor de la clase Enemigo
      *
@@ -34,10 +44,11 @@ public class Enemigo {
      * @param x      posicion sobre el eje x del enemigo
      * @param y      posicion sobre el eje y del enemigo
      */
-    public Enemigo(Bitmap imagen, float x, float y) {
+    public Enemigo(Bitmap imagen, float x, float y,int lado) {
         this.imagen = imagen;
         this.posicion = new PointF(x, y);
         this.setRectangulos();
+        this.lado=lado;
     }
 
     /**
@@ -62,14 +73,14 @@ public class Enemigo {
      */
     public void moverEnemigo(int alto, int ancho, int velocidad) {
 
-        if (PantallaJuego.lado == 0) {
+        if (lado == 0) {
             posicion.y += velocidad;
             if (posicion.y > alto / 2.5) {
                 posicion.y = alto * 0;
 
             }
         }
-        if (PantallaJuego.lado == 1) {
+        if (lado == 1) {
             posicion.x += velocidad;
             if (posicion.x > ancho / 2.5) {
                 posicion.x = ancho * 0;
@@ -77,14 +88,14 @@ public class Enemigo {
             }
         }
 
-        if (PantallaJuego.lado == 2) {
+        if (lado == 2) {
             posicion.y -= velocidad;
             if (posicion.y < alto / 2.5) {
                 posicion.y = alto;
 
             }
         }
-        if (PantallaJuego.lado == 3) {
+        if (lado == 3) {
             posicion.x -= velocidad;
             if (posicion.x < ancho / 2.5) {
                 posicion.x = ancho;

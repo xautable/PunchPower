@@ -2,6 +2,7 @@ package com.example.juanjo.punchpower;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.hardware.SensorEvent;
 import android.support.constraint.ConstraintLayout;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,7 +39,8 @@ public class PantallaRecord extends Escenas {
      * @param carpetafuente cadena que localiza la fuente
      * @param editor objeto tipo sharedpreferences.editor usado para editar las preferencias
      */
-    Bitmap fondoRecord;
+    Bitmap fondoRecord, btnLista;
+    Rect rbotonLista;
     Typeface fuente;
     String txtRecord, txtMejorPuntuacion, txtEnviarPuntuacion, txtPuntuacionActual, carpetafuente = "fonts/Avara.otf";
     static int mejorpuntuacion = 0, puntuacionactual;
@@ -50,12 +53,15 @@ public class PantallaRecord extends Escenas {
     public PantallaRecord(Context context) {
         super(context);
         fondoRecord = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.fondorecords), ancho, alto, true);
+        btnLista=Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.botonlistacompleta), (int) (ancho / 7), alto / 13, true);
+        rbotonLista= new Rect((int) (ancho / 1.5), (int) (alto / 1.1), (int) (ancho / 1.5) + btnLista.getWidth(), (int) (alto / 1.1) + btnLista.getHeight());
         fuente = Typeface.createFromAsset(context.getApplicationContext().getAssets(), carpetafuente);
         txtRecord = context.getString(R.string.titulorecord);
         txtMejorPuntuacion = context.getString(R.string.mejorpuntuacion);
         txtEnviarPuntuacion = context.getString(R.string.agitarparaenviar);
         txtPuntuacionActual = context.getString(R.string.puntuacionactual);
         mejorpuntuacion = preferencias.getInt("enemigos", mejorpuntuacion);
+        this.context=context;
         if (mejorpuntuacion < puntuacionactual) {
             mejorpuntuacion = puntuacionactual;
 
@@ -87,6 +93,7 @@ public class PantallaRecord extends Escenas {
     public void dibujar(Canvas c) {
         super.dibujar(c);
         c.drawBitmap(fondoRecord, 0, 0, null);
+        c.drawBitmap(btnLista,rbotonLista.left,rbotonLista.top,null);
         Paint p = new Paint();
         p.setColor(Color.RED);
         p.setTextSize(ancho / 10);
@@ -103,16 +110,17 @@ public class PantallaRecord extends Escenas {
         editor.putInt("enemigos", mejorpuntuacion);
         editor.commit();
     }
-    /**
-     * Funcion que gestiona los sensores en esta pantalla
-     *
-     * @param event recoge un evento producido por los sensores del dispositivo
-     */
-    @Override
-    public int onSensorChanged(SensorEvent event) {
-        super.onSensorChanged(event);
 
+    @Override
+    public int gestionBotonLista(MotionEvent event) {
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        Rect pulsa = new Rect(x, y, x + 10, y + 10);
+        if (pulsa.intersect(rbotonLista)) {
+            Intent intentListado=new Intent(context,ListadoJugadores.class);
+               context.startActivity(intentListado);
+
+        }
         return 5;
     }
-
 }

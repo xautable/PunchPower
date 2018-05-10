@@ -23,7 +23,7 @@ public class Escenas {
      * @param preferencias objeto que representa un sharedpreferences
      */
     static int alto, ancho;
-    Context context;
+     Context context=null;
     public static SharedPreferences preferencias;
 
     /**
@@ -85,6 +85,9 @@ public class Escenas {
     }
 
     public int gestionaColDatos(MotionEvent event) {
+        return 0;
+    }
+    public int gestionBotonLista(MotionEvent event) {
         return 0;
     }
 }

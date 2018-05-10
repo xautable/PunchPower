@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class BaseDeDatos extends SQLiteOpenHelper {
     String sql = "CREATE TABLE Record(ID INTEGER PRIMARY KEY AUTOINCREMENT, Nombre TEXT,Puntos INTEGER)";
-
+    ArrayList<Jugador> nombres = new ArrayList<>();
+    Jugador j;
     public BaseDeDatos(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -24,23 +25,25 @@ public class BaseDeDatos extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Record");
-        sqLiteDatabase.execSQL(sql);
+       // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Record");
+        //sqLiteDatabase.execSQL(sql);
     }
 
     public ArrayList llenar_lv() {
-        ArrayList<String> nombres = new ArrayList<>();
-        SQLiteDatabase database = this.getWritableDatabase();
-        String q = "SELECT * FROM Record";
-        String nombre;
-        Cursor registros = database.rawQuery(q, null);
 
-        //Log.v("ooo","sss"+registros.getColumnName(registros.getPosition()+1),null);
+        SQLiteDatabase database = this.getWritableDatabase();
+        String q = "SELECT * FROM Record order by Puntos desc";
+        int  pj=1;
+        String nombre;
+        Cursor registros = database.rawQuery(q,null);
+
             if (registros.moveToFirst()) {
 
                 do {
-                    Log.v("ooo", "sss" + registros.getString(registros.getColumnIndex("Nombre")), null);
-
+                    j=new Jugador(pj,registros.getString(registros.getColumnIndex("Nombre")),registros.getInt((registros.getColumnIndex("Puntos"))));
+                    nombres.add(j);
+                    pj++;
+                  //  Log.v("aaa",""+registros.getInt(registros.getColumnIndex("ID")));
                 } while (registros.moveToNext());
 
 

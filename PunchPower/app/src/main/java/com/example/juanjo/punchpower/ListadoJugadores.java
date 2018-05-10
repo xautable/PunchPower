@@ -12,17 +12,23 @@ import java.util.ArrayList;
 public class ListadoJugadores extends AppCompatActivity {
 
     ListView lv;
-    ArrayList<String> nombres;
-    ArrayAdapter adaptador;
-    String n;
+    ArrayList<Jugador> nombres;
+    AdaptadorListaRecord adaptador;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_jugadores);
         lv=(ListView)findViewById(R.id.lv);
-        BaseDeDatos db=new BaseDeDatos(getApplicationContext(),null,null,1);
+        BaseDeDatos db=new BaseDeDatos(getApplicationContext(),"Record",null,1);
         nombres=db.llenar_lv();
-        adaptador=new ArrayAdapter(this,android.R.layout.simple_list_item_1,nombres);
+        //for(int i=0;i<nombres.size();i++){
+
+            //usuario="Posición: "+nombres.get(i).getId()+"\nNombre: "+nombres.get(i).getNombre()+"\nPuntos: "+nombres.get(i).getPuntos()+"\n";
+            //lista.add(usuario);
+        //}
+        adaptador=new AdaptadorListaRecord(this,nombres);
 
         lv.setAdapter(adaptador);
 

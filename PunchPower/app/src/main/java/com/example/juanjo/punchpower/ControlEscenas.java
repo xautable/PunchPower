@@ -61,6 +61,10 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
     private static final float SHAKE_THRESHOLD = 1.1f;
     private static final int SHAKE_WAIT_TIME_MS = 2500;
     private long mShakeTime = 0;
+    private long tiempoDormido=0;
+    final int FPS=50;
+    final int TPS=1000000000;
+    final int diferenciaTiempo = TPS / FPS;
 
     /**
      * Clase Hilo.
@@ -83,6 +87,7 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
          */
         public void run() {
             while (funcionando) {
+                Long inicioFrame=System.nanoTime();
                 Canvas c = null;
                 try {
                     c = surfaceHolder.lockCanvas();
@@ -99,6 +104,13 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                         surfaceHolder.unlockCanvasAndPost(c);
 
                     }
+                }
+                Long finalFrame=System.nanoTime();
+                tiempoDormido=diferenciaTiempo-(finalFrame-inicioFrame);
+                try {
+                    if (tiempoDormido / 1000000 > 0)
+                        Thread.sleep(tiempoDormido / 1000000);
+                } catch (InterruptedException e) {
                 }
             }
         }
@@ -368,6 +380,13 @@ public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callbac
                 } else {
                     return true;
                 }
+            }
+
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                if(pantallaActual==5){
+                    pantallaActual=pantalla.gestionBotonLista(event);
+                }
+
             }
 
 

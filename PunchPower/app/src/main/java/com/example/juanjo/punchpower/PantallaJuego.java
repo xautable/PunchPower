@@ -18,9 +18,11 @@ import android.os.Vibrator;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Clase PantallaJuego.
@@ -79,6 +81,7 @@ public class PantallaJuego extends Escenas {
     static boolean ataqueabajo = false;
     public GestureDetectorCompat detectorDeGestos;
     Enemigo malo;
+    ArrayList<Enemigo> coleccionEnemigos;
     static SoundPool efectos;
     static public int sonidopunetazo;
     final private int maxSonidosSimultaneos = 10;
@@ -91,13 +94,12 @@ public class PantallaJuego extends Escenas {
     static int puntuacion;
     static boolean acaba;
     String txtLose;
-    int contPoderEspecial=0;
+    int contPoderEspecial = 9;
     static boolean hasVibrator;
     static boolean poderEspecialActivado;
-    Timer timer;
-    Handler handler;
-    Runnable runnable;
-
+    PantallaJuego pantallaJuego;
+    boolean funcionaCrear = true;
+    int contadorParada=0;
 
     /**
      * Constructor de la clase pantalla juego
@@ -107,8 +109,10 @@ public class PantallaJuego extends Escenas {
     public PantallaJuego(Context context) {
         super(context);
         this.context = context;
+        pantallaJuego = this;
         acaba = false;
         puntuacion = 0;
+        coleccionEnemigos = new ArrayList<>();
         fuente = Typeface.createFromAsset(context.getApplicationContext().getAssets(), carpetafuente);
         tickCambio = System.currentTimeMillis();
         txtLose = context.getString(R.string.lose);
@@ -152,49 +156,59 @@ public class PantallaJuego extends Escenas {
             this.efectos = new SoundPool(maxSonidosSimultaneos, AudioManager.STREAM_MUSIC, 0);
         }
         sonidopunetazo = efectos.load(context, R.raw.punch, 1);
-
-        crea();
-
-    }
-    /**
-     * Función que gestiona la creacion de los enemigos
-     */
-    public void crea() {
-        random = new Random();
-        lado = random.nextInt(4);
-
-        if (lado == 0) {
-            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.maloabajo), (int) (ancho / 10), alto / 10, true);
-            malo = new Enemigo(maloi, (int) (ancho / 2.2), (int) (alto / 2.5));
-
-        }
-        if (lado == 1) {
-            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.maloderecha), (int) (ancho / 10), alto / 10, true);
-            malo = new Enemigo(maloi, ancho / 2, (int) (alto / 2.65));
-        }
-        if (lado == 2) {
-            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.maloarriba), (int) (ancho / 10), alto / 10, true);
-            malo = new Enemigo(maloi, (int) (ancho / 2.2), (int) (alto / 1.15));
-        }
-        if (lado == 3) {
-            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.maloizq), (int) (ancho / 10), alto / 10, true);
-            malo = new Enemigo(maloi, (int) (ancho / 1), (int) (alto / 2.65));
-        }
+         final Thread creaEnemigo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                random = new Random();
+                while (funcionaCrear) {
+                Log.v("aaa","Crea: "+funcionaCrear);
 
 
-    }
-    public void metodo_timer(){
+                    if (funcionaCrear) {
+                        lado = random.nextInt(4);
 
-        contPoderEspecial++;
-        if(contPoderEspecial==5){
-            malo.setActivo(true);
+                        if (lado == 0) {
+                            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(pantallaJuego.context.getResources(), R.drawable.maloabajo), (int) (ancho / 10), alto / 10, true);
+                            malo = new Enemigo(maloi, (int) (ancho / 2.2), (int) (alto / 2.5), lado);
+                            coleccionEnemigos.add(malo);
 
-        }else{
-            if(contPoderEspecial>5){
-                contPoderEspecial=0;
+                        }
+                        if (lado == 1) {
+                            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(pantallaJuego.context.getResources(), R.drawable.maloderecha), (int) (ancho / 10), alto / 10, true);
+                            malo = new Enemigo(maloi, ancho / 2, (int) (alto / 2.65), lado);
+                            coleccionEnemigos.add(malo);
+
+                        }
+                        if (lado == 2) {
+                            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(pantallaJuego.context.getResources(), R.drawable.maloarriba), (int) (ancho / 10), alto / 10, true);
+                            malo = new Enemigo(maloi, (int) (ancho / 2.2), (int) (alto / 1.15), lado);
+                            coleccionEnemigos.add(malo);
+
+                        }
+                        if (lado == 3) {
+                            maloi = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(pantallaJuego.context.getResources(), R.drawable.maloizq), (int) (ancho / 10), alto / 10, true);
+                            malo = new Enemigo(maloi, (int) (ancho / 1), (int) (alto / 2.65), lado);
+                            coleccionEnemigos.add(malo);
+
+                        }
+                        try {
+
+                            contadorParada++;
+                            if(contadorParada==5) {
+                                Thread.sleep(3000);
+                                contadorParada=0;
+                            }else{
+                                Thread.sleep(1000);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
-        }
-        handler.postDelayed(runnable,1000);
+        });
+        creaEnemigo.start();
+
     }
 
 
@@ -204,70 +218,79 @@ public class PantallaJuego extends Escenas {
     @Override
     public void actualizarFisica() {
         super.actualizarFisica();
-
-        if (lado == 0)
-            malo.moverEnemigo(alto, ancho, 4);
-        if (lado == 1)
-            malo.moverEnemigo(alto, ancho, 2);
-        if (lado == 2)
-            malo.moverEnemigo(alto, ancho, 4);
-        if (lado == 3)
-            malo.moverEnemigo(alto, ancho, 2);
-
-
-
-        if (malo.isActivo() && cuadradoHeroeArriba.intersect(malo.rectangulo) && ataquearriba == true) {
-            Log.v("aaa", "Colisiona Arriba");
-            malo.setActivo(false);
-            puntuacion++;
-            contPoderEspecial++;
-        }
-        if (malo.isActivo() && cuadradoHeroeAbajo.intersect(malo.rectangulo) && ataqueabajo == true) {
-            Log.v("aaa", "Colisiona Abajo");
-            malo.setActivo(false);
-            puntuacion++;
-            contPoderEspecial++;
-        }
-        if (malo.isActivo() && cuadradoHeroeIzquierda.intersect(malo.rectangulo) && ataqueizquierda == true) {
-            Log.v("aaa", "Colisiona Izquierda");
-            malo.setActivo(false);
-            puntuacion++;
-            contPoderEspecial++;
-        }
-        if (malo.isActivo() && cuadradoHeroeDerecha.intersect(malo.rectangulo) && ataquederecha == true) {
-            Log.v("aaa", "Colisiona Derecha");
-            malo.setActivo(false);
-            puntuacion++;
-            contPoderEspecial++;
-        }
-        if (malo.isActivo() && cuadradoHeroe.intersect(malo.rectangulo)) {
-            Log.v("aaa", "Fin");
-            malo.setActivo(false);
-            PantallaRecord.puntuacionactual = puntuacion;
-            acaba = true;
-        }
-
-        if (!malo.isActivo() && acaba == false) {
-
-            crea();
-
-        }
-//        if(contPoderEspecial==30){
-//            poderEspecialActivado=true;
+//        if (coleccionEnemigos.isEmpty() && acaba == false) {
+//
+//            // crea();
+//
 //        }
+        for (int i = 0; i < coleccionEnemigos.size(); i++) {
 
-        if(poderEspecialActivado==true){
-            malo.setActivo(false);
-            vibracionMovil();
+            if (coleccionEnemigos.get(i).getLado() == 0)
+                coleccionEnemigos.get(i).moverEnemigo(alto, ancho, 2);
 
-        }
+            if ((coleccionEnemigos.get(i).getLado() == 1))
+                coleccionEnemigos.get(i).moverEnemigo(alto, ancho, 3);
 
-        if (System.currentTimeMillis() - tickCambio > 10000&& poderEspecialActivado==true && !malo.isActivo()) {
-            tickCambio = System.currentTimeMillis();
-            poderEspecialActivado=false;
-            contPoderEspecial=0;
-            malo.setActivo(true);
+            if ((coleccionEnemigos.get(i).getLado() == 2))
+                coleccionEnemigos.get(i).moverEnemigo(alto, ancho, 4);
 
+            if ((coleccionEnemigos.get(i).getLado() == 3))
+                coleccionEnemigos.get(i).moverEnemigo(alto, ancho, 2);
+
+
+            if (coleccionEnemigos.get(i).isActivo() && cuadradoHeroeArriba.intersect(coleccionEnemigos.get(i).rectangulo) && ataquearriba == true) {
+                //Log.v("aaa", "Colisiona Arriba");
+                coleccionEnemigos.remove(i);
+                puntuacion++;
+                contPoderEspecial++;
+            }
+            if (coleccionEnemigos.get(i).isActivo() && cuadradoHeroeAbajo.intersect(coleccionEnemigos.get(i).rectangulo) && ataqueabajo == true) {
+                //Log.v("aaa", "Colisiona Abajo");
+                coleccionEnemigos.remove(i);
+                puntuacion++;
+                contPoderEspecial++;
+            }
+            if (coleccionEnemigos.get(i).isActivo() && cuadradoHeroeIzquierda.intersect(coleccionEnemigos.get(i).rectangulo) && ataqueizquierda == true) {
+               // Log.v("aaa", "Colisiona Izquierda");
+                coleccionEnemigos.remove(i);
+                puntuacion++;
+                contPoderEspecial++;
+            }
+            if (coleccionEnemigos.get(i).isActivo() && cuadradoHeroeDerecha.intersect(coleccionEnemigos.get(i).rectangulo) && ataquederecha == true) {
+                //Log.v("aaa", "Colisiona Derecha");
+                coleccionEnemigos.remove(i);
+                puntuacion++;
+                contPoderEspecial++;
+            }
+            if (coleccionEnemigos.get(i).isActivo() && cuadradoHeroe.intersect(coleccionEnemigos.get(i).rectangulo)) {
+                //Log.v("aaa", "Fin");
+                funcionaCrear=false;
+                coleccionEnemigos.clear();
+                PantallaRecord.puntuacionactual = puntuacion;
+                acaba = true;
+
+            }
+
+
+            if (contPoderEspecial == 10) {
+                poderEspecialActivado = true;
+
+            }
+
+            if (poderEspecialActivado == true) {
+                coleccionEnemigos.clear();
+                vibracionMovil();
+                puntuacion++;
+            }
+
+            if (System.currentTimeMillis() - tickCambio > 7000 && poderEspecialActivado == true && coleccionEnemigos.isEmpty()) {
+                tickCambio = System.currentTimeMillis();
+                poderEspecialActivado = false;
+                contPoderEspecial = 0;
+                funcionaCrear=true;
+
+
+            }
         }
 
     }
@@ -285,8 +308,8 @@ public class PantallaJuego extends Escenas {
         p.setColor(Color.BLUE);
         p.setTextSize(ancho / 10);
         p.setTypeface(fuente);
-        c.drawText(""+puntuacion,(int)(ancho/1.55),alto/9,p);
-
+        c.drawText("" + puntuacion, (int) (ancho / 1.55), alto / 9, p);
+        Log.v("aaa", "Cosas:" + coleccionEnemigos.size() + coleccionEnemigos.isEmpty());
         if (ataquederecha == false && ataqueizquierda == false && ataqueabajo == false && ataquearriba == false) {
             if (PantallaPersonajes.personajeEsSakura == true)
                 c.drawBitmap(sakura, cuadradoHeroe.left, (int) (cuadradoHeroe.top), null);
@@ -297,22 +320,23 @@ public class PantallaJuego extends Escenas {
             p.setTextAlign(Paint.Align.CENTER);
             c.drawText(txtLose, (int) (ancho / 2), alto / 6, p);
         } else {
-            if (malo.isActivo()) {
-                if (lado == 0) {
-                    c.drawBitmap(malo.imagen, malo.posicion.x, malo.posicion.y, null);
-                }
-                if (lado == 1) {
-                    c.drawBitmap(malo.imagen, malo.posicion.x, malo.posicion.y, null);
+            for (int i = 0; i < coleccionEnemigos.size(); i++) {
+                if (coleccionEnemigos.get(i).isActivo()) {
+                    if (lado == 0) {
+                        c.drawBitmap(coleccionEnemigos.get(i).imagen, coleccionEnemigos.get(i).posicion.x, coleccionEnemigos.get(i).posicion.y, null);
+                    }
+                    if (lado == 1) {
+                        c.drawBitmap(coleccionEnemigos.get(i).imagen, coleccionEnemigos.get(i).posicion.x, coleccionEnemigos.get(i).posicion.y, null);
 
-                }
-                if (lado == 2) {
-                    c.drawBitmap(malo.imagen, malo.posicion.x, malo.posicion.y, null);
-                }
-                if (lado == 3) {
-                    c.drawBitmap(malo.imagen, malo.posicion.x, malo.posicion.y, null);
+                    }
+                    if (lado == 2) {
+                        c.drawBitmap(coleccionEnemigos.get(i).imagen, coleccionEnemigos.get(i).posicion.x, coleccionEnemigos.get(i).posicion.y, null);
+                    }
+                    if (lado == 3) {
+                        c.drawBitmap(coleccionEnemigos.get(i).imagen, coleccionEnemigos.get(i).posicion.x, coleccionEnemigos.get(i).posicion.y, null);
+                    }
                 }
             }
-
 
             if (ataquederecha == true) {
                 if (PantallaPersonajes.personajeEsSakura == true)
@@ -366,6 +390,7 @@ public class PantallaJuego extends Escenas {
 
 
     }
+
     public void vibracionMovil() {
         Vibrator mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         hasVibrator = mVibrator.hasVibrator();
