@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondopantalladatos"
-    tools:context=".PantallaDatos">
+    tools:context="app.example.juanjo.PunchPower.PantallaDatos">
 
     <EditText
         android:id="@+id/editTextNombre"

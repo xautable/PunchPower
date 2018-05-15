@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.juanjo.punchpower.PantallaJuego">
+    tools:context="app.example.juanjo.PunchPower.PantallaJuego">
 
 </android.support.constraint.ConstraintLayout>

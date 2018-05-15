@@ -10,3 +10,9 @@ Hasta el dia de hoy las mejoras o nuevos elementos de mi proyecto son los siguie
 6- Agrege la red social twitter para que el usuario envie un tweet ya sea el predefinido que dice que el juego mola y el enlace(cuando este)de la play store o si quiere puede escribir uno propio.
 7- Agregue la red Social Facebook, estuve tocando la api de facebook pero para el uso que yo quiero no era necesario aunque en un futuro agregare un login por facebook
 8- Implemente el poder especial que cada 30 enemigos tienes un intervalo de varios segundos para tomar un respiro antes de que vuelvan a salir los enemigos.
+9- En la pantalla record he agregado dos animaciones una que salen globos y otra para el boton lista.
+10- Una pantalla nueva donde visualizo los jugadores registrados y sus puntuaciones.
+11- A la pantalla de la lista de jugadores le implemente un adaptador personalizado y agregue mas animaciones.
+12- Agregue un control de frames para ir a 50.
+13- Modifique la creacion de enemigos para hacerla multiple.
+14- Subi la app a la play store.
