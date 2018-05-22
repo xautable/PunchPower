@@ -13,7 +13,7 @@ import android.view.MotionEvent;
  * Clase secundaria, de la que heredan las pantallas
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class Escenas {
     /**

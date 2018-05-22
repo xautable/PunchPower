@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Clase secundaria, donde se gestiona la base de datos de records
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class BaseDeDatos extends SQLiteOpenHelper {
     /**

@@ -15,7 +15,7 @@ import android.support.v4.view.GestureDetectorCompat;
  * Clase secundaria, donde se gestiona la pantalla opciones
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaOpciones extends Escenas {
     /**

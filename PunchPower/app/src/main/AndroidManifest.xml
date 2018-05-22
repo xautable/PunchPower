@@ -37,13 +37,6 @@
         <activity android:name=".PantallaOpciones" />
         <activity android:name=".PantallaDatos" />
         <activity android:name=".ListadoJugadores" />
-        <activity android:name=".AdaptadorListadoJugadores" />
-
-        <provider
-            android:name="com.facebook.FacebookContentProvider"
-            android:authorities="com.facebook.app.FacebookContentProvider1234"
-            android:exported="true" />
-
         <activity android:name=".AdaptadorListaRecord" />
     </application>
 

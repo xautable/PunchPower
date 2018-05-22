@@ -18,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView;
  * Clase secundaria donde se registra el usuario tras perder
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 
 public class PantallaDatos extends AppCompatActivity {

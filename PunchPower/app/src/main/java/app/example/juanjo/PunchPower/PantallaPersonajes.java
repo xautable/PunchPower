@@ -16,7 +16,7 @@ import android.view.MotionEvent;
  * Clase secundaria, donde se gestiona la pantalla de seleccion de personajes
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaPersonajes extends Escenas {
     /**

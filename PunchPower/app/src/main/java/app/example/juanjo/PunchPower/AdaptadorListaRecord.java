@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Clase secundaria, donde se rellena el listview de los records
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class AdaptadorListaRecord extends BaseAdapter {
     /**

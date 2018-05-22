@@ -10,7 +10,7 @@ import android.view.MotionEvent;
  * Clase secundaria, donde se gestionan los gestos
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 class DetectorDeGestos extends GestureDetector.SimpleOnGestureListener {
     /**

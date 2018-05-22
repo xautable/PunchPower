@@ -29,7 +29,7 @@ import java.util.concurrent.locks.Lock;
  * Clase secundaria, donde se gestiona la pantalla juego
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaJuego extends Escenas {
     /**
@@ -283,7 +283,7 @@ public class PantallaJuego extends Escenas {
                 puntuacion++;
             }
 
-            if (System.currentTimeMillis() - tickCambio > 7000 && poderEspecialActivado == true && coleccionEnemigos.isEmpty()) {
+            if (System.currentTimeMillis() - tickCambio > 4000 && poderEspecialActivado == true && coleccionEnemigos.isEmpty()) {
                 tickCambio = System.currentTimeMillis();
                 poderEspecialActivado = false;
                 contPoderEspecial = 0;
@@ -394,7 +394,7 @@ public class PantallaJuego extends Escenas {
     public void vibracionMovil() {
         Vibrator mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         hasVibrator = mVibrator.hasVibrator();
-        mVibrator.vibrate(7000);
+        mVibrator.vibrate(4000);
     }
 
 

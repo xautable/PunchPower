@@ -17,7 +17,7 @@ import android.view.WindowManager;
  * Clase principal, donde se gestionan todos los procesos de la aplicacion
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class MainActivity extends Activity {
     /**

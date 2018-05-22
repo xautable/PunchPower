@@ -19,7 +19,7 @@ import java.util.List;
  * Clase secundaria, donde se gestionan la pantalla menu de inicio
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaInicio extends Escenas {
     /**

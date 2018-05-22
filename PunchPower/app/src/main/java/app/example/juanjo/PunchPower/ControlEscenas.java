@@ -26,7 +26,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
  * Clase secundaria, donde se gestiona lo que pasa en la aplicacion(control de escenas eventos touch...etc)
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class ControlEscenas extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
     /**

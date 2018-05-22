@@ -22,7 +22,7 @@ import com.airbnb.lottie.LottieAnimationView;
  * Clase secundaria, donde se gestiona la pantalla de mejor puntuacion y tu puntuacion actual
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaRecord extends Escenas {
     /**

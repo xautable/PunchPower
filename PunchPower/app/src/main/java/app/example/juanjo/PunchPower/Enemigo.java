@@ -12,7 +12,7 @@ import java.util.Random;
  * Clase secundaria, donde se gestionan los enemigos
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 
 public class Enemigo {

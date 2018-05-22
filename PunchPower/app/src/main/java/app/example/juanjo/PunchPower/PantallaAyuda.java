@@ -15,7 +15,7 @@ import android.view.MotionEvent;
  * Clase secundaria, donde se gestionan la pantalla ayuda
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class PantallaAyuda extends Escenas {
     /**

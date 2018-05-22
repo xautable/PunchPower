@@ -5,7 +5,7 @@ package app.example.juanjo.PunchPower;
  * Clase secundaria, donde se crea la estructura para los objetos de tipo jugador
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class Jugador {
     /**

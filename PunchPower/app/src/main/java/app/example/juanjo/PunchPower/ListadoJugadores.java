@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Clase secundaria, donde se muestra un listado con los jugadores registrados
  *
  * @author Juanjo
- * @version 1.1
+ * @version 1.15
  */
 public class ListadoJugadores extends AppCompatActivity {
     /**
